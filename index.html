@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Message for Jil</title>
-  <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 
+  <!-- Typewriter and EmailJS -->
+  <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
@@ -101,21 +103,25 @@
   <audio id="music" src="panaginip.mp3"></audio>
 
   <script>
+    // Initialize EmailJS
+    (function() {
+      emailjs.init({
+        publicKey: "dcVn_9a8Q0kZW-4pM", // ✅ Your actual EmailJS public key
+      });
+    })();
+
     const mainImg = document.getElementById("mainImg");
     const clickText = document.getElementById("clickText");
     const messageBox = document.getElementById("message");
     const gif = document.getElementById("gif");
     const btns = document.getElementById("btns");
     const music = document.getElementById("music");
+    const yesBtn = document.getElementById("yesBtn");
 
     let started = false;
 
     const messages = [
-      "um",
-      "...",
-      "hi jil",
-      "...",
-      "umm",
+      "um", "...", "hi jil", "...", "umm",
       "maybe u were thinking nanaman na nang-ghost ako",
       "di talaga",
       "hihiya pa me mag-chat",
@@ -215,6 +221,21 @@
             .start();
         }, 600);
       }
+    });
+
+    yesBtn.addEventListener("click", function () {
+      const timestamp = new Date().toLocaleString("en-PH", { timeZone: "Asia/Manila" });
+      emailjs.send("service_re1w5pb", "template_sawtvgh", {
+        message: `Jil clicked the 💗 button on your message page!\n\nTime: ${timestamp}`,
+        to_name: "Ryouki Tenkai",
+        email_to: "ryoukitenkai21@gmail.com"
+      })
+      .then(() => {
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        alert("Oops! Something went wrong while sending the email.");
+      });
     });
   </script>
 </body>
