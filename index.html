@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Message for Jil</title>
+  <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #ffd6e8; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      font-family: "Poppins", sans-serif;
+      overflow: hidden;
+    }
+
+    #mainImg {
+      width: 250px;
+      cursor: pointer;
+      transition: opacity 0.6s ease, transform 0.3s ease;
+    }
+
+    #mainImg:hover {
+      transform: scale(1.05);
+    }
+
+    #clickText {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.9rem;
+      color: #ff5c8d;
+      margin-top: 15px;
+      animation: bounce 1.2s infinite;
+      text-shadow: 1px 1px #fff;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #333;
+      text-align: center;
+      display: none;
+      min-height: 120px;
+      max-width: 90%;
+      line-height: 1.7;
+    }
+
+    #gif {
+      display: none;
+      margin-top: 20px;
+      width: 180px;
+    }
+
+    #btns {
+      display: none;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 15px;
+    }
+
+    button {
+      padding: 10px 25px;
+      border: none;
+      border-radius: 20px;
+      background-color: #ff85a2;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #ff5c8d;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+ 
+  <img id="mainImg" src="chuchuu.gif" alt="Click me!" />
+  <div id="clickText">CLICK CHUUCHU 🐾</div>
+
+  <div id="message"></div>
+  <img id="gif" src="bb.png" alt="Cute GIF" />  
+  <div id="btns">
+    <button id="yesBtn">💗</button>
+  </div>
+
+  <audio id="music" src="panaginip.mp3"></audio>
+
+  <script>
+    const mainImg = document.getElementById("mainImg");
+    const clickText = document.getElementById("clickText");
+    const messageBox = document.getElementById("message");
+    const gif = document.getElementById("gif");
+    const btns = document.getElementById("btns");
+    const music = document.getElementById("music");
+
+    let started = false;
+
+    const messages = [
+      "um",
+      "...",
+      "hi jil",
+      "...",
+      "umm",
+      "maybe u were thinking nanaman na nang-ghost ako",
+      "di talaga",
+      "hihiya pa me mag-chat",
+      "and I know",
+      "that you might still be a little upset with me",
+      "about kagabi",
+      "...",
+      "sorry it took me a while",
+      "I really didn't know how to bring this up to you",
+      "and to think that u were already giving hints",
+      "about sa nalaman mo",
+      "...",
+      "but please believe me,",
+      "there's nothing going on between me and that girl",
+      "like even before,",
+      "kasama lang talaga 'yon sa kakulitan noon",
+      "and close lang talaga kami non",
+      "since sila yung first kong nakasundo sa sdf",
+      "but this was before pa ha",
+      "...",
+      "...",
+      "anyway,",
+      "mali ko na di ko agad sinabi sayo",
+      "na para bang pinag-ooverthink pa kita tuloy lalo",
+      "and yeah, mali ko talaga yun",
+      "I admit that",
+      "...",
+      "I just really hope we can be okay again",
+      "kasi to be honest,",
+      "natutuwa na talaga ako sayo",
+      "and tangina,",
+      "ang bigat pag di tayo nag-uusap",
+      "di ko rin alam paano ko uusad sa ganitong sitwasyon",
+      "ayoko maging 'the man who can't be moved' huhu",
+      "...",
+      "...",
+      "pero jil,",
+      "gusto kita, gustong gusto",
+      "I really like you to the point that",
+      "I want to get to know you more deeply,",
+      "that I want to focus on just you,",
+      "that I'll be patient with you.",
+      "...",
+      "I want us to figure this out together, jil",
+      "I don't want this misunderstanding",
+      "to break what we have.",
+      "...",
+      "and if feel mo na ayaw mo pa akong kausap,",
+      "then it's okay.",
+      "take your time muna,",
+      "alam kong mad ka pa sakin,",
+      "but just so you know,",
+      "I'm still here, waiting for you",
+      "always, in all ways.",
+      "...",
+      "...",
+      "-shuji"
+    ];
+
+    mainImg.addEventListener("click", function () {
+      if (!started) {
+        started = true;
+        mainImg.style.opacity = "0";
+        clickText.style.opacity = "0";
+
+        setTimeout(() => {
+          mainImg.style.display = "none";
+          clickText.style.display = "none";
+          messageBox.style.display = "block";
+
+          if (music.paused) {
+            music.play();
+          }
+
+          const typewriter = new Typewriter(messageBox, {
+            loop: false,
+            delay: 85,
+            deleteSpeed: 70,
+            cursor: "|",
+            autoStart: true
+          });
+
+          typewriter.deleteAll();
+
+          messages.forEach((msg, i) => {
+            typewriter.typeString(msg).pauseFor(1000);
+            if (i !== messages.length - 1) {
+              typewriter.deleteAll();
+            }
+          });
+
+          typewriter
+            .callFunction(() => {
+              gif.style.display = "block";
+              btns.style.display = "flex";
+            })
+            .start();
+        }, 600);
+      }
+    });
+  </script>
+</body>
+</html>
